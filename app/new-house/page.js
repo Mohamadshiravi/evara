@@ -28,6 +28,7 @@ import FormBtn from "@/components/module/form-btn";
 import swal from "sweetalert";
 import RegisterNewAccount from "@/components/template/regitser-account-form";
 import { LuDollarSign } from "react-icons/lu";
+import { MdWarningAmber } from "react-icons/md";
 
 export default function AddNewHomeSection() {
   const [state, formAction] = useFormState(AddNewHouseHandler, {
@@ -466,6 +467,11 @@ export default function AddNewHomeSection() {
             action={formAction}
             className="flex flex-col items-center gap-6"
           >
+            <h4 className="flex items-center gap-3 bg-emerald-100 rounded-md py-3 px-5 text-emerald-800">
+              <MdWarningAmber className="text-5xl" />
+              به دلیل محدود بودن امکانات پنل رایگان هاست اگر اینترنت ضعیفی داشته
+              باشید و رکوئست بیشتر از پنج ثانیه طول بکشه وبسایت کرش میکنه !
+            </h4>
             <Input
               name="title"
               type="text"
