@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: shabnam;
+  src: url("/fonts/Shabnam.ttf");
+}
+@font-face {
+  font-family: moraba-regular;
+  src: url("/fonts/Morabba-Regular.woff");
+}
+@font-face {
+  font-family: moraba-heavy;
+  src: url("/fonts/Morabba-Heavy.woff");
+}
+@font-face {
+  font-family: moraba-bold;
+  src: url("/fonts/Morabba-Bold.woff");
+}
+.shabnam-font {
+  font-family: shabnam;
+  font-weight: 100;
+}
+.moraba-regular {
+  font-family: moraba-regular;
+}
+.moraba-heavy {
+  font-family: moraba-heavy;
+}
+.moraba-bold {
+  font-family: moraba-bold;
+}
+
+* {
+  -moz-font-feature-settings: "ss01";
+  -webkit-font-feature-settings: "ss01";
+  font-feature-settings: "ss01";
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: rgb(202, 202, 202);
+}
+*::-webkit-scrollbar-thumb {
+  width: 3px;
+  height: 3px;
+  background-color: rgb(55, 55, 55);
+}
+body {
+  font-family: moraba-regular;
+  direction: rtl;
+}
+#header-cover {
+  background-image: url(/images/14-04-26A.jpg);
+}
+#breadCrumb-cover {
+  background-image: url(/images/14-04-26A.jpg);
+}
+#animate-fade {
+  animation: fadeInDownBig 0.4s ease;
+}
+@keyframes fadeInDownBig {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
+.swal-title {
+  font-size: 1.6rem !important;
+  font-family: "moraba-bold" !important;
+}
+.swal-footer {
+  font-family: "moraba-bold" !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swal-button--confirm {
+  transition: all 0.2s;
+  background-color: rgb(0, 104, 67) !important;
+}
+.swal-button--confirm:hover {
+  background-color: rgb(0, 53, 34) !important;
+}
+#page-status {
+  animation: page-status linear;
+  animation-timeline: scroll();
+}
+@keyframes page-status {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 100%;
+  }
+}
+.Toastify__toast--error {
+  border: 2px solid #00271b;
+  border-radius: 5px !important;
+  background: #059669 !important;
+  font-family: "moraba-bold" !important;
+}
+.Toastify__toast {
+  border: 2px solid #00271b;
+  border-radius: 5px !important;
+  background: #059669 !important;
+  font-family: "moraba-bold" !important;
+  color: white !important;
+}
+.swal-text {
+  text-align: center;
+}
