@@ -33,10 +33,6 @@
 Live on [https://evara-six.vercel.app/](https://evara-six.vercel.app/)
 <br />
 
-<h1 align="center">
-  <a href="https://github.com/Mohamadshiravi/evara.git"><img src="public/md/evara-6.png" alt="evara"></a>
-</h1>
-
 ## Run Project on local
 
 **Note:**
