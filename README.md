@@ -1,11 +1,52 @@
-## Getting Started
+<h1 align="center">
+  <br>
+  <a href="https://github.com/Mohamadshiravi/evara.git"><img src="public/md/evara-1.png" alt="evara"></a>
+</h1>
 
-!!! You need MongoDB for Run Project
+<h4 align="center">A full-stack real estate website with Next UI</h4>
+
+<p align="center">
+
+  <a href="http://nextjs.org">
+    <img src="https://img.shields.io/badge/next%20js-v14-black">
+    <img src="https://img.shields.io/badge/tailwind-v3-indigo">
+    <img src="https://img.shields.io/badge/next%20ui-pink">
+  </a>
+
+</p>
+
+<br/>
+
+### Features:
+
+- **Dark mode**
+- **Change Profile photo**
+- **add House with any details**
+- **advanced search**
+- **save House**
+- **special slider**
+
+<h1 align="center">
+  <a href="https://github.com/Mohamadshiravi/evara.git"><<img src="public/md/evara-9.png" alt="evara"></a>
+</h1>
+
+Live on [https://evara-six.vercel.app/](https://evara-six.vercel.app/)
+<br />
+
+<h1 align="center">
+  <a href="https://github.com/Mohamadshiravi/evara.git"><<img src="public/md/evara-6.png" alt="evara"></a>
+</h1>
+
+## Run Project on local
+
+**Note:**
+
+> !!! You need MongoDB for Run Project
 
 add This environment variables to run project :
 
 ```bash
-PRIVATE_KEY : random String
+PRIVATE_KEY : randomString
 MONGODB_URI : your mongodb connection string
 ```
 
@@ -29,6 +70,4 @@ yarn start
 pnpm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-Live on [https://set-coffee-eight.vercel.app/](https://set-coffee-eight.vercel.app/)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the project
