@@ -10,7 +10,7 @@
   <a href="http://nextjs.org">
     <img src="https://img.shields.io/badge/next%20js-v14-black">
     <img src="https://img.shields.io/badge/tailwind-v3-indigo">
-    <img src="https://img.shields.io/badge/next%20ui-pink">
+    <img src="https://img.shields.io/badge/next%20ui-indigo">
   </a>
 
 </p>
@@ -27,14 +27,14 @@
 - **special slider**
 
 <h1 align="center">
-  <a href="https://github.com/Mohamadshiravi/evara.git"><<img src="public/md/evara-9.png" alt="evara"></a>
+  <a href="https://github.com/Mohamadshiravi/evara.git"><img src="public/md/evara-9.png" alt="evara"></a>
 </h1>
 
 Live on [https://evara-six.vercel.app/](https://evara-six.vercel.app/)
 <br />
 
 <h1 align="center">
-  <a href="https://github.com/Mohamadshiravi/evara.git"><<img src="public/md/evara-6.png" alt="evara"></a>
+  <a href="https://github.com/Mohamadshiravi/evara.git"><img src="public/md/evara-6.png" alt="evara"></a>
 </h1>
 
 ## Run Project on local
