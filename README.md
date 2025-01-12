@@ -19,11 +19,12 @@
 
 ### Features:
 
-- **Dark mode**
-- **Change Profile photo**
-- **add House with any details**
+- **user authentication with refresh Token(30s) without external pakage**
+- **dark mode**
+- **change profile photo**
+- **add house with any details**
 - **advanced search**
-- **save House**
+- **save house**
 - **special slider**
 
 <h1 align="center">
