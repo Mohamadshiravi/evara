@@ -178,9 +178,6 @@ export function HomeCard(props) {
     try {
       if (res.status === 201) {
         newToast("خانه ذخیره شد");
-        setInterval(() => {
-          location.reload();
-        }, 1500);
       } else {
         newToast("خانه در ذخیره شده های شما موجود است");
       }
@@ -193,9 +190,7 @@ export function HomeCard(props) {
 
     if (res.status === 200) {
       newToast("خانه از ذخیره های شما حذف شد");
-      setInterval(() => {
-        location.reload();
-      }, 1500);
+      props.reRenderHouse();
     }
   }
   async function DeleteHouseHandler() {

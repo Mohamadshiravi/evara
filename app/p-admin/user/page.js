@@ -25,7 +25,7 @@ export default async function UsersPage() {
           >
             <img
               src={e.avatar}
-              className="lg:w-[100px] w-[500px] aspect-square rounded-lg"
+              className="lg:w-[100px] w-[500px] aspect-square rounded-lg object-cover"
             />
             <div className="flex lg:flex-row flex-col items-center gap-6">
               <div className="flex dark:border-zinc-700 dark:text-white flex-col lg:items-start items-center gap-2 lg:border-l-2 lg:border-b-0 border-b-2 lg:pl-8 pb-4 text-zinc-700">

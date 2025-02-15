@@ -7,7 +7,7 @@ import AOSInit from "@/components/template/AOS-init";
 import { ToastContainer } from "react-toastify";
 
 export const metadata = {
-  title: "املاکی Evara (fake)",
+  title: "املاکی Evara",
   description: "خرید و فروش ملک و خانه",
 };
 
