@@ -30,15 +30,14 @@ export default function HomePageTabs({ images }) {
         {tab === "2" && (
           <div className="w-full h-full flex items-center justify-center">
             <p className="text-zinc-700 text-2xl px-10 text-center">
-              داداش جدی انتظار نداری ک توی یه نمونه کار بتونی خونه رو سه بعدی
-              ببینی.
+              این قابلیت پیاده سازی نشده است.
             </p>
           </div>
         )}
         {tab === "3" && (
           <div className="w-full h-full flex items-center justify-center">
             <p className="text-zinc-700 text-2xl px-10 text-center">
-              این قابلیتم نداریم !!!
+              این قابلیت پیاده سازی نشده است.
             </p>
           </div>
         )}
