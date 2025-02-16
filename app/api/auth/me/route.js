@@ -27,8 +27,6 @@ export async function GET() {
           httpOnly: true,
           maxAge: 60 * 60 * 1000 * 24,
         });
-        console.log(refreshToken);
-
         return Response.json({ data: refreshToken.user });
       }
     }
