@@ -9,7 +9,6 @@ import { FaLock } from "react-icons/fa6";
 import { MdOutlineSpeed } from "react-icons/md";
 import { TbWorld } from "react-icons/tb";
 import { FaCubes } from "react-icons/fa";
-import { FaFaceSmileWink } from "react-icons/fa6";
 import { MdCall } from "react-icons/md";
 
 export default function EvaraSlider() {
@@ -34,11 +33,6 @@ export default function EvaraSlider() {
       icon: <MdCall />,
       des: "تیم پشتیبانی ما همیشه با حوصله جواب شما رو میده",
       title: "پشتیبانی قوی",
-    },
-    {
-      icon: <FaFaceSmileWink />,
-      des: "واسه اینم چیزی به ذهنم نمیرسه",
-      title: "اینم اخری",
     },
   ]);
   return (

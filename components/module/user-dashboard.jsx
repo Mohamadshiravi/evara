@@ -4,6 +4,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  DropdownSection,
   DropdownTrigger,
 } from "@nextui-org/react";
 
@@ -33,6 +34,7 @@ export default function UserDetailsDropdown({ user }) {
   ]);
 
   useEffect(() => {
+    console.log(user.avatar);
     setImgSrc(user.avatar || "/images/guest.jpg");
   }, []);
 
@@ -53,54 +55,58 @@ export default function UserDetailsDropdown({ user }) {
       <DropdownTrigger>
         <Avatar
           className="cursor-pointer border-2 border-zinc-400"
-          src={imgSrc}
+          src={imgSrc || "/images/guest.jpg"}
         />
       </DropdownTrigger>
-      <DropdownMenu variant="bordered">
-        <DropdownItem isReadOnly>
-          <div className="flex items-center gap-3 justify-end border-b border-zinc-300 dark:border-zinc-700 pb-3">
-            <div className="flex flex-col items-end">
-              <span className="dark:text-zinc-200 font-bold text-zinc-800 font-sans text-lg">
-                {user.name}
-              </span>
-              <span
-                dir="ltr"
-                className="sm:w-[280px] w-[220px] truncate text-left text-base font-mono text-zinc-400 dark:text-zinc-500"
-              >
-                {user.email}
-              </span>
-            </div>
-            <img
-              src={imgSrc}
-              className="w-[50px] h-[50px] object-cover border border-zinc-300 dark:border-zinc-700 rounded-full"
-            />
-          </div>
-        </DropdownItem>
-        <DropdownItem isReadOnly>
-          <h3 className="text-center mb-3">
-            میتوانید عکس پروفایل خود را تغییر دهید
-          </h3>
-          <div className="grid grid-cols-[4fr_4fr_4fr] gap-2 mt-2">
-            {imagesSrc.map((e, i) => (
-              <div
-                key={i}
-                onClick={() => ChangeUserAvatar(e)}
-                className={` ${
-                  e === imgSrc &&
-                  "border-2 overflow-hidden rounded-full border-emerald-600 p-1"
-                }`}
-              >
-                <Image
-                  src={e}
-                  width={800}
-                  height={800}
-                  alt={e + i}
-                  className="sm:w-[100px] sm:h-[100px] w-[80px] h-[80px] rounded-full object-cover hover:scale-[110%] transition"
-                />
+      <DropdownMenu disabledKeys={["profile"]} variant="bordered">
+        <DropdownSection showDivider>
+          <DropdownItem isReadOnly key={"profile"} className="opacity-100">
+            <div className="flex items-center gap-3 justify-end">
+              <div className="flex flex-col items-end">
+                <span className="dark:text-zinc-200 font-bold text-zinc-800 font-sans text-lg">
+                  {user.name}
+                </span>
+                <span
+                  dir="ltr"
+                  className="sm:w-[280px] w-[220px] truncate text-left text-base font-mono text-zinc-400 dark:text-zinc-500"
+                >
+                  {user.email}
+                </span>
               </div>
-            ))}
-          </div>
-        </DropdownItem>
+              <img
+                src={imgSrc}
+                className="w-[50px] h-[50px] object-cover border border-zinc-300 dark:border-zinc-700 rounded-full"
+              />
+            </div>
+          </DropdownItem>
+        </DropdownSection>
+        <DropdownSection>
+          <DropdownItem>
+            <h3 className="text-center mb-3">
+              میتوانید عکس پروفایل خود را تغییر دهید
+            </h3>
+            <div className="grid grid-cols-[4fr_4fr_4fr] gap-2 mt-2 place-items-center">
+              {imagesSrc.map((e, i) => (
+                <div
+                  key={i}
+                  onClick={() => ChangeUserAvatar(e)}
+                  className={` ${
+                    e === imgSrc &&
+                    "border-2 overflow-hidden rounded-full border-emerald-600 p-1"
+                  }`}
+                >
+                  <Image
+                    src={e}
+                    width={800}
+                    height={800}
+                    alt={e + i}
+                    className="sm:w-[100px] sm:h-[100px] w-[80px] h-[80px] rounded-full object-cover hover:scale-[110%] transition"
+                  />
+                </div>
+              ))}
+            </div>
+          </DropdownItem>
+        </DropdownSection>
 
         <DropdownItem
           className={`text-2xl mt-6 ${

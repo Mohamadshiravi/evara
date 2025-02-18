@@ -42,7 +42,9 @@ export default function AllHomes() {
             />
           ))}
           {loading &&
-            Array.from({ length: 6 }).map((e, i) => <HomeCard loading />)}
+            Array.from({ length: 6 }).map((e, i) => (
+              <HomeCard key={i} loading />
+            ))}
         </div>
         {!loading && house.length === 0 && (
           <div className="h-[300px] flex items-center justify-center flex-col gap-4">

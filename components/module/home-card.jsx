@@ -174,8 +174,8 @@ export function HomeCard(props) {
     </div>
   );
   async function AddToSaveHandler() {
-    const res = await axios.post("/api/saved", { houseID: props.id });
     try {
+      const res = await axios.post("/api/saved", { houseID: props.id });
       if (res.status === 201) {
         newToast("خانه ذخیره شد");
       } else {
@@ -186,11 +186,15 @@ export function HomeCard(props) {
     }
   }
   async function DeleteFromSavedHandler() {
-    const res = await axios.delete(`/api/saved/${props.id}`);
+    try {
+      const res = await axios.delete(`/api/saved/${props.id}`);
 
-    if (res.status === 200) {
-      newToast("خانه از ذخیره های شما حذف شد");
-      props.reRenderHouse();
+      if (res.status === 200) {
+        newToast("خانه از ذخیره های شما حذف شد");
+        props.reRenderHouse();
+      }
+    } catch (error) {
+      newErrorToast("خانه از ذخیره های شما حذف نشد");
     }
   }
   async function DeleteHouseHandler() {

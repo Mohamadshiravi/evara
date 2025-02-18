@@ -12,15 +12,27 @@ import { LuDollarSign } from "react-icons/lu";
 import { IoArrowBack } from "react-icons/io5";
 
 import Link from "next/link";
-import HomePageTabs from "@/components/template/home/home-details-tab";
 import evaraHouseModel from "@/models/evara-house";
 import ConnectTODB from "@/config/connect-to-DB";
 import BreadCrumb from "@/components/module/bread-crumb";
+import HomeSlider from "@/components/template/home/home-photo-slider";
+import { notFound } from "next/navigation";
+import mongoose from "mongoose";
+import Image from "next/image";
 
 export default async function HomeDetailsPage({ params }) {
-  await ConnectTODB();
+  if (!mongoose.Types.ObjectId.isValid(params.id)) {
+    notFound();
+  }
 
-  const currentHome = await evaraHouseModel.findOne({ _id: params.id });
+  await ConnectTODB();
+  const currentHome = await evaraHouseModel
+    .findOne({ _id: params.id }, "-__v -updatedAt -queued")
+    .populate("user", "name email avatar");
+
+  if (!currentHome) {
+    notFound();
+  }
   return (
     <>
       <BreadCrumb route={currentHome.title} />
@@ -46,9 +58,44 @@ export default async function HomeDetailsPage({ params }) {
           </Link>
         </div>
         <div className="grid lg:grid-cols-[8fr_4fr] gap-4 mt-4">
-          <HomePageTabs
-            images={JSON.parse(JSON.stringify(currentHome.images))}
-          />
+          <section className="w-full aspect-video overflow-hidden rounded-lg shadow-md">
+            <HomeSlider
+              images={JSON.parse(JSON.stringify(currentHome.images))}
+            />
+          </section>
+          <div className="w-full flex flex-col items-center gap-3 justify-between">
+            <div className="flex lg:flex-col items-center lg:justify-center gap-3 w-full h-full">
+              <Image
+                src={currentHome.user.avatar}
+                alt="user avatar"
+                width={1000}
+                height={1000}
+                className="rounded-full lg:w-[200px] sm:w-[100px] w-[60px] shadow-xl"
+              />
+              <div className="flex flex-col lg:items-center justify-center">
+                <span className="sm:text-3xl text-lg">
+                  {currentHome.user.name}
+                </span>
+                <span className="sm:text-base text-xs text-zinc-500">
+                  {currentHome.user.email}
+                </span>
+              </div>
+            </div>
+
+            <button className="w-full hover:bg-emerald-700 shadow-xl shadow-emerald-600/10 hover:shadow-lg transition duration-500 text-white bg-emerald-600 rounded-lg py-3">
+              تماس با فروشنده
+            </button>
+          </div>
+          <div className="lg:hidden flex items-center dark:border-zinc-700 p-6 justify-between border rounded-lg">
+            <span className="text-zinc-500 moraba-bold gap-1 text-xl flex items-center">
+              <LuDollarSign className="text-2xl" />
+              <span>قیمت</span>
+            </span>
+            <span className="text-emerald-600 moraba-bold flex gap-2 text-2xl">
+              {currentHome.price.toLocaleString()}
+              <span> تومان</span>
+            </span>
+          </div>
           <div className="w-full dark:border-zinc-700 border rounded-lg">
             <div>
               <div className="flex sm:flex-row gap-2 flex-col items-center p-6 justify-between">
@@ -121,36 +168,16 @@ export default async function HomeDetailsPage({ params }) {
               <p className="text-justify pb-8">{currentHome.description}</p>
             </div>
           </div>
-          <div className="border dark:border-zinc-700 w-full rounded-lg">
-            <div className="flex items-center dark:border-zinc-700 p-6 justify-between border-b">
-              <span className="text-zinc-500 moraba-bold gap-1 flex items-center">
-                <LuDollarSign className="text-xl" />
+          <div className=" w-full rounded-lg flex flex-col justify-between">
+            <div className="lg:flex hidden items-center dark:border-zinc-700 p-6 justify-between border rounded-lg">
+              <span className="text-zinc-500 moraba-bold gap-1 text-xl flex items-center">
+                <LuDollarSign className="text-2xl" />
                 <span>قیمت</span>
               </span>
-              <span className="text-emerald-600 moraba-bold flex gap-2">
+              <span className="text-emerald-600 moraba-bold flex gap-2 text-2xl">
                 {currentHome.price.toLocaleString()}
                 <span> تومان</span>
               </span>
-            </div>
-            <div className="p-6">
-              <p className="text-justify">
-                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-                استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله
-                در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد
-                نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان
-                جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را
-                برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در
-                زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و
-                دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و
-                زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات
-                پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-              </p>
-            </div>
-            <div className="p-6">
-              <button className="w-full hover:bg-emerald-700 hover:shadow-lg transition duration-500 text-white bg-emerald-600 rounded-lg py-3">
-                تماس با فروشنده
-              </button>
             </div>
           </div>
         </div>
