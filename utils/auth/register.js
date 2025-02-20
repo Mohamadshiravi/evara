@@ -1,7 +1,7 @@
 "use server";
 
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraUserModel from "@/models/evara-user";
+import userModel from "@/models/user";
 import * as yup from "yup";
 import { HashPass } from "./hash-functions";
 import { JenerateAccessToken, JenerateRefreshToken } from "./token-functions";
@@ -35,7 +35,7 @@ export default async function RegisterHandler(prevState, formData) {
 
     await ConnectTODB();
 
-    const isAnyUserExist = await evaraUserModel.findOne({
+    const isAnyUserExist = await userModel.findOne({
       email: response.email,
     });
 
@@ -71,8 +71,8 @@ export default async function RegisterHandler(prevState, formData) {
       maxAge: 60 * 60 * 1000 * 24 * 15, // 15 day
     });
 
-    const isAdmin = await evaraUserModel.findOne({ role: "admin" });
-    await evaraUserModel.create({
+    const isAdmin = await userModel.findOne({ role: "admin" });
+    await userModel.create({
       name: response.name,
       email: response.email,
       password: hashedPass,

@@ -1,11 +1,15 @@
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraHouseModel from "@/models/evara-house";
+import houseModel from "@/models/house";
+
+export const revalidate = 0;
 
 export async function GET(req) {
   try {
     await ConnectTODB();
 
-    const allHouse = await evaraHouseModel.find({ queued: false });
+    const allHouse = await houseModel
+      .find({ queued: false })
+      .sort({ createdAt: -1 });
 
     return Response.json({ data: allHouse }, { status: 200 });
   } catch (e) {

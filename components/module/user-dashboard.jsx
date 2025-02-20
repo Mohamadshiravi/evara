@@ -15,43 +15,29 @@ import { LuBuilding2 } from "react-icons/lu";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LogOutUser from "@/utils/auth/log-out";
-import { newToast } from "@/utils/helper-function";
+import { newErrorToast, newToast } from "@/utils/helper-function";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MdPhotoCamera } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export default function UserDetailsDropdown({ user }) {
   const [imgSrc, setImgSrc] = useState("");
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const path = usePathname();
 
-  const [imagesSrc, setImagesSrc] = useState([
-    "/uploads/avatar/66beeaec47a55.jpg",
-    "/uploads/avatar/66c440fd12ba6.png",
-    "/uploads/avatar/6628792bd5ab7.jpg",
-    "/uploads/avatar/66c4444071532.png",
-    "/uploads/avatar/66f230da90a04.png",
-    "/uploads/avatar/657aa3ce3b26c.jpg",
-  ]);
-
   useEffect(() => {
-    console.log(user.avatar);
-    setImgSrc(user.avatar || "/images/guest.jpg");
+    setImgSrc(user.avatar);
   }, []);
 
-  async function ChangeUserAvatar(src) {
-    if (imgSrc === src) {
-      return false;
-    } else {
-      await axios.post("/api/avatar", {
-        src: src,
-        userID: user._id,
-      });
-      setImgSrc(src);
-      newToast("عکس پروفایل شما تغییر کرد");
-    }
-  }
   return (
-    <Dropdown backdrop="blur" radius="sm" showArrow>
+    <Dropdown
+      backdrop="blur"
+      radius="sm"
+      showArrow
+      isOpen={isModalOpen}
+      onOpenChange={setIsModalOpen}
+    >
       <DropdownTrigger>
         <Avatar
           className="cursor-pointer border-2 border-zinc-400"
@@ -81,30 +67,29 @@ export default function UserDetailsDropdown({ user }) {
           </DropdownItem>
         </DropdownSection>
         <DropdownSection>
-          <DropdownItem>
-            <h3 className="text-center mb-3">
-              میتوانید عکس پروفایل خود را تغییر دهید
-            </h3>
-            <div className="grid grid-cols-[4fr_4fr_4fr] gap-2 mt-2 place-items-center">
-              {imagesSrc.map((e, i) => (
-                <div
-                  key={i}
-                  onClick={() => ChangeUserAvatar(e)}
-                  className={` ${
-                    e === imgSrc &&
-                    "border-2 overflow-hidden rounded-full border-emerald-600 p-1"
-                  }`}
-                >
-                  <Image
-                    src={e}
-                    width={800}
-                    height={800}
-                    alt={e + i}
-                    className="sm:w-[100px] sm:h-[100px] w-[80px] h-[80px] rounded-full object-cover hover:scale-[110%] transition"
-                  />
-                </div>
-              ))}
-            </div>
+          <DropdownItem isReadOnly>
+            <label
+              htmlFor="photoInp"
+              className="relative block w-[150px] h-[150px] border rounded-full m-auto my-4 border-4 border-emerald-600"
+            >
+              <Image
+                src={imgSrc}
+                width={800}
+                height={800}
+                alt="user avatar"
+                className="w-full h-full rounded-full object-cover"
+              />
+              <div className="bg-black/60 opacity-70 hover:opacity-100 transition duration-300 cursor-pointer rounded-full w-full h-full absolute top-0 left-0 flex items-center justify-center">
+                <MdPhotoCamera className="text-zinc-300 text-4xl" />
+              </div>
+            </label>
+            <input
+              id="photoInp"
+              onChange={AddAvatarHandler}
+              accept="image/*"
+              type="file"
+              className="absolute w-0 h-0 top-0"
+            />
           </DropdownItem>
         </DropdownSection>
 
@@ -151,4 +136,38 @@ export default function UserDetailsDropdown({ user }) {
       </DropdownMenu>
     </Dropdown>
   );
+  async function AddAvatarHandler(e) {
+    if (e.target.files && e.target.files[0]) {
+      const fileSizeInMB = e.target.files[0].size / (1024 * 1024); //to MB
+
+      if (fileSizeInMB < 4) {
+        const formData = new FormData();
+        formData.append("img", e.target.files[0]);
+
+        const id = toast.loading("در حال اپلود عکس ...");
+        setIsModalOpen(false);
+        const res = await axios.post(`/api/avatar/${user._id}`, formData);
+        if (res.status === 200) {
+          toast.update(id, {
+            render: "عکس پروفایل شما با موفقیت تغییر کرد",
+            type: "success",
+            isLoading: false,
+            autoClose: 4000,
+            theme: "colored",
+          });
+          setImgSrc(res.data.url);
+        } else {
+          toast.update(id, {
+            render: "عکس پروفایل شما تغییر نکرد",
+            type: "error",
+            isLoading: false,
+            autoClose: 4000,
+            theme: "colored",
+          });
+        }
+      } else {
+        newErrorToast("حجم عکس نباید بیشتر از دو مگابایت باشد");
+      }
+    }
+  }
 }

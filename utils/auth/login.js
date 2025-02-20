@@ -1,7 +1,7 @@
 "use server";
 
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraUserModel from "@/models/evara-user";
+import userModel from "@/models/user";
 import { VerifyPass } from "./hash-functions";
 import { JenerateAccessToken, JenerateRefreshToken } from "./token-functions";
 import { cookies } from "next/headers";
@@ -15,7 +15,7 @@ export default async function LogInHandler(prevState, formData) {
   try {
     await ConnectTODB();
 
-    const isAnyUserExist = await evaraUserModel.findOne({
+    const isAnyUserExist = await userModel.findOne({
       email: user.email,
     });
 
@@ -50,7 +50,7 @@ export default async function LogInHandler(prevState, formData) {
       email: isAnyUserExist.email,
     });
 
-    await evaraUserModel.findOneAndUpdate(
+    await userModel.findOneAndUpdate(
       { _id: isAnyUserExist._id },
       { refreshToken }
     );

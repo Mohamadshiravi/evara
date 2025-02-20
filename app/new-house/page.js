@@ -431,24 +431,26 @@ export default function AddNewHomeSection() {
     }
     fetchUserData();
   }, []);
+
   useEffect(() => {
-    async function HouseCreated() {
-      if (state.status) {
-        const isOk = await swal({
-          icon: "success",
-          title: "اگهی شما اضافه شد",
-          text: "اگهی شما با موفقیت در صف قرار گرفت و پس از تایید مدیریت در سایت به نمایش گذاشته میشود",
-          buttons: "ممنون",
-        });
-        if (isOk) {
-          location.reload();
-        } else {
-          location.reload();
-        }
+    HouseCreated();
+    console.log(state);
+  }, [state]);
+
+  async function HouseCreated() {
+    if (state.status) {
+      const isOk = await swal({
+        icon: "success",
+        title: "اگهی شما اضافه شد",
+        buttons: "ممنون",
+      });
+      if (isOk) {
+        location.reload();
+      } else {
+        location.reload();
       }
     }
-    HouseCreated();
-  }, [state]);
+  }
   return (
     <main className="bg-gray-100 dark:bg-zinc-900 sm:pt-36 pt-28 pb-16">
       <section className="bg-white dark:bg-zinc-800 m-auto rounded-lg shadow-lg w-11/12 py-10 sm:px-10 px-4">
@@ -481,6 +483,19 @@ export default function AddNewHomeSection() {
               color="primary"
               label="عنوان"
               placeholder="عنوان اگهی شما"
+              startContent={
+                <AiOutlineHome className="text-2xl text-emerald-600" />
+              }
+            />
+            <Input
+              name="phone"
+              type="text"
+              radius="sm"
+              variant="underlined"
+              size="lg"
+              color="primary"
+              label="شماره موبایل"
+              placeholder=" شماره موبایل شما جهت تماس گرفتن مشتری"
               startContent={
                 <AiOutlineHome className="text-2xl text-emerald-600" />
               }
@@ -639,7 +654,7 @@ export default function AddNewHomeSection() {
             </div>
             <Input
               name="price"
-              type="number"
+              type="price"
               radius="sm"
               variant="bordered"
               size="lg"

@@ -16,19 +16,20 @@ export default function UserHouses() {
   const [house, setHouse] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    async function FetchUserHouse() {
-      setLoading(true);
-      const theUser = await IsUserLogedIn();
-      if (!theUser) {
-        router.push("/auth/login");
-      } else {
-        const userHouse = await axios.get(`/api/house/${theUser._id}`);
-        setHouse(userHouse.data.data);
-        setLoading(false);
-      }
-    }
     FetchUserHouse();
   }, []);
+
+  async function FetchUserHouse() {
+    setLoading(true);
+    const theUser = await IsUserLogedIn();
+    if (!theUser) {
+      router.push("/auth/login");
+    } else {
+      const userHouse = await axios.get(`/api/house/${theUser._id}`);
+      setHouse(userHouse.data.data);
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -45,7 +46,7 @@ export default function UserHouses() {
                 با رفتن به بخش ثبت رایگان ملک میتوانید خانه خود را اگهی کنید
               </p>
               <Button
-                onClick={() => router.push("/new-house")}
+                onPress={() => router.push("/new-house")}
                 className="moraba-bold text-white px-8 py-2 bg-emerald-600 text-lg rounded-md mt-6"
               >
                 ثبت اگهی
@@ -69,6 +70,7 @@ export default function UserHouses() {
               <section className="sm:mt-20 mt-10 w-full grid lg:grid-cols-[4fr_4fr_4fr] md:grid-cols-[6fr_6fr] gap-4">
                 {house.map((e, i) => (
                   <HomeCard
+                    reRenderHouse={FetchUserHouse}
                     key={i}
                     img={e.images[0]}
                     id={e._id}

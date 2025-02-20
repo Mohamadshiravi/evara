@@ -1,12 +1,12 @@
 import { HomeCard } from "@/components/module/home-card";
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraHouseModel from "@/models/evara-house";
+import houseModel from "@/models/house";
 import Link from "next/link";
 import { IoArrowBack } from "react-icons/io5";
 
 export default async function PAdminHouse() {
   await ConnectTODB();
-  const AllHouse = await evaraHouseModel.find({}, null, { sort: "-_id" });
+  const AllHouse = await houseModel.find({}, null, { sort: "-_id" });
 
   return (
     <main className={`sm:px-10 px-6 sm:py-20 py-8`}>

@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
-import evaraUserModel from "./evara-user";
+import userModel from "./user";
 
 const houseSchema = mongoose.Schema(
   {
     title: {
+      type: String,
+      required: true,
+    },
+    phone: {
       type: String,
       required: true,
     },
@@ -50,10 +54,13 @@ const houseSchema = mongoose.Schema(
     images: {
       type: [String],
     },
+    fileID: {
+      type: [String],
+    },
     user: {
       type: mongoose.Types.ObjectId,
       required: true,
-      ref: "EvaraUser",
+      ref: "User",
     },
     queued: {
       type: Boolean,
@@ -65,7 +72,7 @@ const houseSchema = mongoose.Schema(
   }
 );
 
-const evaraHouseModel =
-  mongoose.models.EvaraHouse || mongoose.model("EvaraHouse", houseSchema);
+const houseModel =
+  mongoose.models.House || mongoose.model("House", houseSchema);
 
-export default evaraHouseModel;
+export default houseModel;

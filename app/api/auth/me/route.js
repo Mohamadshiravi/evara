@@ -1,5 +1,5 @@
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraUserModel from "@/models/evara-user";
+import userModel from "@/models/user";
 import { VerifyAccessToken } from "@/utils/auth/token-functions";
 import RefreshToken from "@/utils/refresh-token/refresh-token";
 import { cookies } from "next/headers";
@@ -33,7 +33,7 @@ export async function GET() {
 
     await ConnectTODB();
 
-    const theUser = await evaraUserModel.findOne(
+    const theUser = await userModel.findOne(
       { email: isTokenValid.email },
       "-__v -password"
     );

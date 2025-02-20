@@ -1,10 +1,10 @@
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraUserModel from "@/models/evara-user";
+import userModel from "@/models/user";
 import { FiUser } from "react-icons/fi";
 
 export default async function UsersPage() {
   await ConnectTODB();
-  const allUser = await evaraUserModel.find({});
+  const allUser = await userModel.find({});
 
   return (
     <div className="px-6">

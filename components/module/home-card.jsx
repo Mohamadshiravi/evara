@@ -10,6 +10,7 @@ import axios from "axios";
 import { newErrorToast, newToast, ShowSwal } from "@/utils/helper-function";
 import { IoCloseSharp } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa";
+import Image from "next/image";
 
 export function HomeCard(props) {
   return props.loading ? (
@@ -42,7 +43,6 @@ export function HomeCard(props) {
     </section>
   ) : (
     <div
-      data-aos="zoom-in-up"
       className={`border-2 dark:border-zinc-700 dark:text-white transition duration-500 relative rounded-md w-full h-full overflow-hidden`}
     >
       <div className="w-full h-[200px]">
@@ -84,9 +84,13 @@ export function HomeCard(props) {
               </Tooltip>
             )}
           </div>
-          <img
+          <Image
+            width={800}
+            height={800}
+            radius="none"
             src={props.img || "/images/default-img.avif"}
             className="w-full h-full object-center object-cover"
+            alt="house photo"
           />
         </div>
       </div>
@@ -191,7 +195,9 @@ export function HomeCard(props) {
 
       if (res.status === 200) {
         newToast("خانه از ذخیره های شما حذف شد");
-        props.reRenderHouse();
+        if (props.reRenderHouse) {
+          props.reRenderHouse();
+        }
       }
     } catch (error) {
       newErrorToast("خانه از ذخیره های شما حذف نشد");
@@ -207,9 +213,9 @@ export function HomeCard(props) {
       const res = await axios.delete(`/api/house/${props.id}`);
       if (res.status === 200) {
         newToast("اگهی شما حذف شد");
-        setInterval(() => {
-          location.reload();
-        }, 1500);
+        if (props.reRenderHouse) {
+          props.reRenderHouse();
+        }
       }
     }
   }

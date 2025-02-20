@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { VerifyAccessToken } from "../auth/token-functions";
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraUserModel from "@/models/evara-user";
+import userModel from "@/models/user";
 
 export default async function IsUserLogedInServer() {
   try {
@@ -19,7 +19,7 @@ export default async function IsUserLogedInServer() {
 
     await ConnectTODB();
 
-    const theUser = await evaraUserModel.findOne(
+    const theUser = await userModel.findOne(
       { email: isTokenValid.email },
       "-__v -password"
     );

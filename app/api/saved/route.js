@@ -1,6 +1,6 @@
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraSaveModel from "@/models/evara-saved";
-import evaraUserModel from "@/models/evara-user";
+import saveModel from "@/models/saved";
+import userModel from "@/models/user";
 import { VerifyAccessToken } from "@/utils/auth/token-functions";
 import RefreshToken from "@/utils/refresh-token/refresh-token";
 import { cookies } from "next/headers";
@@ -34,7 +34,7 @@ export async function POST(req) {
 
     await ConnectTODB();
 
-    const theUser = await evaraUserModel.findOne(
+    const theUser = await userModel.findOne(
       { email: isTokenValid.email },
       "-__v -password"
     );
@@ -43,14 +43,14 @@ export async function POST(req) {
       return Response.json({ m: "user not found" }, { status: 404 });
     }
 
-    const isSavedExist = await evaraSaveModel.findOne({
+    const isSavedExist = await saveModel.findOne({
       house: houseID,
       user: theUser._id,
     });
     if (isSavedExist) {
       return Response.json({ m: "alerdy saved" }, { status: 200 });
     }
-    await evaraSaveModel.create({
+    await saveModel.create({
       user: theUser._id,
       house: houseID,
     });

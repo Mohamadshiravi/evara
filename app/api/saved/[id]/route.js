@@ -1,8 +1,10 @@
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraSaveModel from "@/models/evara-saved";
+import saveModel from "@/models/saved";
 import RefreshToken from "@/utils/refresh-token/refresh-token";
 import IsUserLogedInServer from "@/utils/user/is-user-logedin-server";
 import { cookies } from "next/headers";
+
+export const revalidate = 0;
 
 export async function GET(req, { params }) {
   try {
@@ -22,7 +24,7 @@ export async function GET(req, { params }) {
     }
     await ConnectTODB();
 
-    const userSaved = await evaraSaveModel
+    const userSaved = await saveModel
       .find({
         user: params.id,
       })
@@ -52,7 +54,7 @@ export async function DELETE(req, { params }) {
     }
     await ConnectTODB();
 
-    await evaraSaveModel.findOneAndDelete({
+    await saveModel.findOneAndDelete({
       house: params.id,
     });
 

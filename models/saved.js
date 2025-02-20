@@ -4,16 +4,15 @@ const savedSchema = mongoose.Schema({
   house: {
     type: mongoose.Types.ObjectId,
     required: true,
-    ref: "EvaraHouse",
+    ref: "House",
   },
   user: {
     type: mongoose.Types.ObjectId,
     required: true,
-    ref: "EvaraUser",
+    ref: "User",
   },
 });
 
-const evaraSaveModel =
-  mongoose.models.EvaraSaved || mongoose.model("EvaraSaved", savedSchema);
+const saveModel = mongoose.models.Save || mongoose.model("Save", savedSchema);
 
-export default evaraSaveModel;
+export default saveModel;

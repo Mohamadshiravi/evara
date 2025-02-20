@@ -3,7 +3,7 @@ import {
   JenerateAccessToken,
   VerifyRefreshToken,
 } from "../auth/token-functions";
-import evaraUserModel from "@/models/evara-user";
+import userModel from "@/models/user";
 import ConnectTODB from "@/config/connect-to-DB";
 
 export default async function RefreshToken() {
@@ -15,7 +15,7 @@ export default async function RefreshToken() {
 
   await ConnectTODB();
 
-  const isRefreshForUs = await evaraUserModel.findOne(
+  const isRefreshForUs = await userModel.findOne(
     {
       refreshToken: refToken,
     },

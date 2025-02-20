@@ -12,7 +12,7 @@ import { LuDollarSign } from "react-icons/lu";
 import { IoArrowBack } from "react-icons/io5";
 
 import Link from "next/link";
-import evaraHouseModel from "@/models/evara-house";
+import houseModel from "@/models/house";
 import ConnectTODB from "@/config/connect-to-DB";
 import BreadCrumb from "@/components/module/bread-crumb";
 import HomeSlider from "@/components/template/home/home-photo-slider";
@@ -26,9 +26,11 @@ export default async function HomeDetailsPage({ params }) {
   }
 
   await ConnectTODB();
-  const currentHome = await evaraHouseModel
+  const currentHome = await houseModel
     .findOne({ _id: params.id }, "-__v -updatedAt -queued")
     .populate("user", "name email avatar");
+
+  console.log(currentHome);
 
   if (!currentHome) {
     notFound();
@@ -70,7 +72,7 @@ export default async function HomeDetailsPage({ params }) {
                 alt="user avatar"
                 width={1000}
                 height={1000}
-                className="rounded-full lg:w-[200px] sm:w-[100px] w-[60px] shadow-xl"
+                className="rounded-full lg:w-[200px] lg:h-[200px] sm:w-[100px] sm:h-[100px] w-[60px] object-cover h-[60px] shadow-xl"
               />
               <div className="flex flex-col lg:items-center justify-center">
                 <span className="sm:text-3xl text-lg">

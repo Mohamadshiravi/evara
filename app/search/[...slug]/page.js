@@ -1,7 +1,7 @@
 import { HomeCard } from "@/components/module/home-card";
 import HomeHeader from "@/components/module/home-header";
 import ConnectTODB from "@/config/connect-to-DB";
-import evaraHouseModel from "@/models/evara-house";
+import houseModel from "@/models/house";
 
 export default async function SearchSection({ params, searchParams }) {
   const decodedProvince = decodeURIComponent(params.slug[0]);
@@ -11,9 +11,9 @@ export default async function SearchSection({ params, searchParams }) {
   await ConnectTODB();
   let searchedHouse = [];
   if (params.slug[2] === undefined) {
-    searchedHouse = await evaraHouseModel.find({ city: decodedCity });
+    searchedHouse = await houseModel.find({ city: decodedCity });
   } else {
-    let firstSearchedHouse = await evaraHouseModel.find({ city: decodedCity });
+    let firstSearchedHouse = await houseModel.find({ city: decodedCity });
     searchedHouse = firstSearchedHouse.filter((e) =>
       e.address.includes(decodedAddress)
     );

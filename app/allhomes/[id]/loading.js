@@ -11,11 +11,8 @@ export default function HomeLoading() {
         </div>
         <div className="grid lg:grid-cols-[8fr_4fr] gap-4 mt-1">
           <Skeleton height={"500px"} />
-          <div className="grid grid-cols-[6fr_6fr] gap-4">
-            <Skeleton height={"250px"} />
-            <Skeleton height={"250px"} />
-            <Skeleton height={"250px"} />
-            <Skeleton height={"250px"} />
+          <div className="flex items-center justify-center">
+            <Skeleton height={"200px"} width={"200px"} borderRadius={100} />
           </div>
         </div>
       </section>

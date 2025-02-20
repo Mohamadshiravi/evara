@@ -156,14 +156,6 @@ export function Header() {
           ></div>
         </nav>
       )}
-      {userData.role === "admin" && (
-        <Link
-          href={"/p-admin/house"}
-          className="fixed bottom-4 right-4 z-50 bg-gray-100 dark:bg-zinc-700 dark:text-white border-2 border-zinc-300 dark:border-zinc-800 px-10 py-3 text-xl text-zinc-700 moraba-bold rounded-lg shadow-lg"
-        >
-          رفتن به پنل ادمین
-        </Link>
-      )}
       <MobileMenu closeMenu={CloseMenu} isMenu={isMenuOpen} />
     </>
   );

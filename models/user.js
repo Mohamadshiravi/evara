@@ -19,6 +19,10 @@ const userSchema = mongoose.Schema({
   },
   avatar: {
     type: String,
+    default: "/images/guest.jpg",
+  },
+  fileID: {
+    type: String,
   },
   refreshToken: {
     type: String,
@@ -26,7 +30,6 @@ const userSchema = mongoose.Schema({
   },
 });
 
-const evaraUserModel =
-  mongoose.models.EvaraUser || mongoose.model("EvaraUser", userSchema);
+const userModel = mongoose.models.User || mongoose.model("User", userSchema);
 
-export default evaraUserModel;
+export default userModel;

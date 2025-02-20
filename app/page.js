@@ -4,7 +4,7 @@ import EvaraAbout from "@/components/template/evara-about-slider";
 import HomeHeader from "@/components/module/home-header";
 import { RecentlySLider } from "@/components/template/recently-product";
 import { SpecialSLider } from "@/components/template/special-slider";
-import evaraHouseModel from "@/models/evara-house";
+import houseModel from "@/models/house";
 import ConnectTODB from "@/config/connect-to-DB";
 
 export default async function Home() {
