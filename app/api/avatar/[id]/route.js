@@ -27,7 +27,6 @@ export async function POST(req, { params }) {
       return Response.json({ m: "user notFound" }, { status: 404 });
     }
 
-    console.log(oldUserData);
     if (oldUserData.avatar !== "/images/guest.jpg") {
       await imagekit.deleteFile(oldUserData.fileID);
     }
@@ -50,8 +49,6 @@ export async function POST(req, { params }) {
       url: response.url,
     });
   } catch (error) {
-    console.log(error);
-
     return Response.json({ m: "avatar not changed" }, { status: 500 });
   }
 }

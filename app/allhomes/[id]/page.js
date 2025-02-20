@@ -30,8 +30,6 @@ export default async function HomeDetailsPage({ params }) {
     .findOne({ _id: params.id }, "-__v -updatedAt -queued")
     .populate("user", "name email avatar");
 
-  console.log(currentHome);
-
   if (!currentHome) {
     notFound();
   }

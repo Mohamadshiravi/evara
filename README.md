@@ -21,8 +21,9 @@
 
 - **user authentication with refresh Token(30s) without external pakage**
 - **dark mode**
-- **change profile photo**
-- **add house with any details**
+- **upload and change profile photo**
+- **add house with any details and photo**
+- **photos upload on ImageKit cloud storage**
 - **advanced search**
 - **save house**
 - **special slider**
@@ -39,12 +40,17 @@ Live on [https://evara-six.vercel.app/](https://evara-six.vercel.app/)
 **Note:**
 
 > !!! You need MongoDB for Run Project
+> !!! You need ImageKit account and storage for upload on cloud
 
 add This environment variables to run project :
 
 ```bash
 PRIVATE_KEY : randomString
 MONGODB_URI : your mongodb connection string
+
+NEXT_PUBLIC_PUBLIC_KEY= 'get it form Imagekit'
+CLOUD_PRIVATE_KEY='get it form Imagekit'
+NEXT_PUBLIC_URL_ENDPOINT='get it form Imagekit'
 ```
 
 And, You Need build Project By :

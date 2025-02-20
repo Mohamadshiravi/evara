@@ -432,11 +432,6 @@ export default function AddNewHomeSection() {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    HouseCreated();
-    console.log(state);
-  }, [state]);
-
   async function HouseCreated() {
     if (state.status) {
       const isOk = await swal({
